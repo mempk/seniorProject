@@ -78,7 +78,7 @@ render(){
         return(
 
             <Router>
-              {this.state.headerShow? <Header/>:null}
+              <Header user={this.state.userType} authenticated={this.state.authenticated}/>
               <div className="App" style={"style",{"margin":50,}}>
               <Switch>
               <Route path='/' component={LoginForm} exact/>

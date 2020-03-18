@@ -133,7 +133,7 @@ class SignUpForm extends Component{
             onChange={this.handleChange} 
             name="userType"
             >
-                
+                <option value="">Select Your Program</option>
                 <option value="collegeProgram">College Program</option>
                 <option value="Community">Community</option>
                 <option value="General Studies">General Studies</option>
