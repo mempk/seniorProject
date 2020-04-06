@@ -1,24 +1,27 @@
 import React,{Component} from 'react';
-import Header from "./Header";
+import GeneralStudiesFormAll from '../GeneralStudiesForm/GeneralStudiesFormAll';
+
+
+
 
 
 class GeneralStudies extends Component {
+   render(){
 
 
-    render(){
+    return(
 
-        return(
-
-          <React.Fragment>
+      <>
+      <div className="App" style={"style",{"margin":50,}}>
+      <GeneralStudiesFormAll />
+      </div>
+      </>
+    )
+   }
       
-              This is page for General Studies
 
 
-          </React.Fragment>
-
-
-        )
-    }
+  
 
 
 }

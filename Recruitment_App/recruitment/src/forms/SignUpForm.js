@@ -1,5 +1,7 @@
 import React ,{ Component,useState} from 'react';
-import fire from '../auth/firebase'
+import {Link} from 'react-router-dom';
+import fire from '../auth/firebase';
+import form from '../css/form.css';
 
 import { withRouter } from 'react-router-dom';
 
@@ -16,12 +18,14 @@ class SignUpForm extends Component{
         this.signUpAuth= this.signUpAuth.bind(this);
         this.state={
 
-            name:'',
+            firstName:'',
+            lastName:'',
             email:'',
             firstPassword:'',
             confirmedPassword:'',
             userType:'',
             showAdmin:true,
+            adminUID:'',
 
 
 
@@ -30,16 +34,20 @@ class SignUpForm extends Component{
     componentDidMount(){
 
 
-        fire.database().ref().child("Users").orderByChild("userType").equalTo("Admin").once("value",snapshot => {
+        fire.database().ref("Users").orderByChild("userType").equalTo("Admin").on("value",snapshot => {
             if (snapshot.exists()){
-                const userData = snapshot.val();
+                snapshot.forEach(child=>
+                    {this.setState({adminUID:child.key})})
+
               console.log("Admin account already created");
               this.setState({showAdmin:false})
+             
             }
             else{
                 console.log("Admin account not created")
             }
         })
+        
         
         
     }
@@ -58,13 +66,18 @@ class SignUpForm extends Component{
     signUpAuth =e=>{
         
         e.preventDefault();
+        if(this.state.showAdmin === false){
         fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.confirmedPassword).then((data)=>{
             var UID = data.user.uid;
             var postData ={
+                
+                firstName: this.state.firstName,
+                lastName:this.state.lastName,
+                email: this.state.email,
                 userType: this.state.userType,
-                name: this.state.name
+
             };
-            fire.database().ref().child("Users").child(UID).set(postData);
+            fire.database().ref().child("Users").child(this.state.adminUID).child("Recruiters").child(UID).set(postData);
             fire.auth().signOut().then(()=> {
              
             });
@@ -80,8 +93,29 @@ class SignUpForm extends Component{
             
         }
 
+        else {
+            fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.confirmedPassword).then((data)=>{
+                var UID = data.user.uid;
+                var postData ={
+                    firstName: this.state.firstName,
+                    lastName:this.state.lastName,
+                    email: this.state.email,
+                    userType: this.state.userType,
+                };
+                fire.database().ref().child("Users").child(UID).set(postData);
+                fire.auth().signOut().then(()=> {
+                 
+                });
+             
+                
+                this.props.history.push('/');
     
+                })
 
+        }
+
+    
+    }
 
   
       
@@ -93,63 +127,49 @@ class SignUpForm extends Component{
 
         return(
 
+            <div className="App" style={"style",{"margin":50,}}>
+
+            <div className="container signupContainer">
+
+                <h4 className="loginText text center">Sign Up</h4>
 
 
-            <div className="container">
-
-
-            <form id="SignUpForm">
 
 
 
-            <div className="form-group">
-                <label for="fullName">Full Name</label>
-                <input  value={this.state.name} onChange={this.handleChange} name="name"type="name" className="form-control" aria-describedby="emailHelp" placeholder="Enter your full name"/>
-               
-            </div>
 
-            <div className="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input  value={this.state.email} onChange={this.handleChange} name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <input  value={this.state.firstName} onChange={this.handleChange} name="firstName"type="name" className="form-control"  placeholder="Enter your first name"/>
+                <input  value={this.state.lastName} onChange={this.handleChange} name="lastName"type="name" className="form-control"  placeholder="Enter your last name"/>
+                <input  value={this.state.email} onChange={this.handleChange} name="email" type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter valid email address"/>
                 <input   value={this.state.firstPassword} onChange={this.handleChange} name="firstPassword" type="password" className="form-control" id="firstInputPassword1" placeholder="Password"/>
-            </div>
-
-            <div className="form-group">
-                <label for="exampleInputPassword1">Confirm Password</label>
-                <input value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" className="form-control" id="confirmInputPassword1" placeholder="Password"/>
-            </div>
-            
-            
-            <div className="form-group">
-            <label for="userType">Choose Your User Type</label>
-            
-
-            <select className="form-control" id="exampleFormControlSelect1"
-            value={this.state.userType}
-            onChange={this.handleChange} 
-            name="userType"
-            >
-                <option value="">Select Your Program</option>
-                <option value="collegeProgram">College Program</option>
-                <option value="Community">Community</option>
-                <option value="General Studies">General Studies</option>
-                <option value="Pre College">Pre College</option>
-                {this.state.showAdmin && <option value="Admin">Admin</option> }
+                <input value={this.state.confirmedPassword} onChange={this.handleChange} name="confirmedPassword" type="password" className="form-control" id="confirmInputPassword1" placeholder="Confirm Password"/>
                 
-                
-            </select>
-            </div>
-
+                <select style={{width:'85%',height:'45px',backgroundColor:'rgb(0,38,76',color:'white'}}
+                value={this.state.userType}
+                onChange={this.handleChange} 
+                name="userType"
+                >
+                     <option value="">Select Your Program Type</option>
+                    {!this.state.showAdmin && <option value="collegeProgram">College Program</option>}
+                    {!this.state.showAdmin && <option value="outreach">Division of Outreach</option>}
+                    {!this.state.showAdmin && <option value="General Studies">General Studies</option>}
+                    {!this.state.showAdmin && <option value="Pre College">Pre College</option>}
+                    {this.state.showAdmin && <option value="Admin">Admin</option> }
+                    
+                    
+                </select>
+            
+            
+            <br/>
+            <small id="emailHelp">We'll never share your email with anyone else.</small>
+            <button type="submit" style ={{width:'50%'}} onClick={this.signUpAuth} className="loginButton">Create Account</button>
+            <p>Have an account? <Link style={{color:'rgb(0,38,76)'}}to='/'>Log In</Link></p>
         
-            <button type="submit" onClick={this.signUpAuth} className="btn btn-primary">Submit</button>
-        </form>
+     
 
     
 
+        </div>
         </div>
 
         )

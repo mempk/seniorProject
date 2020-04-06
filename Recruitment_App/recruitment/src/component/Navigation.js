@@ -6,7 +6,6 @@ import fire from '../auth/firebase';
 
 import Admin from '../subcomponents/Admin';
 import CollegeProgram from '../subcomponents/CollegeProgram';
-import Comuniversity from '../subcomponents/Comuniversity';
 import GeneralStudies from '../subcomponents/GeneralStudies';
 import PreCollege from '../subcomponents/PreCollege';
 import Header from '../subcomponents/Header';
@@ -14,6 +13,11 @@ import Login from '../forms/LoginForm';
 import SignUp from '../forms/SignUpForm';
 import Recruiter from '../subcomponents/Recruiter';
 import LoginForm from '../forms/LoginForm';
+import PageNotFound from '../subcomponents/PageNotFound';
+import Footer from '../subcomponents/Footer';
+import OutreachPage from '../subcomponents/OutreachPage';
+import background from '../images/background.jpg';
+import ManagerRecruiter from '../subcomponents/ManageRecruiter';
 
 
 
@@ -29,9 +33,16 @@ class Navigation extends Component{
       authenticated: "",
       userType: "",
       headerShow:false,
+      adminUID:'',
+      
     }}
   
    componentDidMount(){
+
+    fire.database().ref("Users").orderByChild("userType").equalTo("Admin").on("value",snapshot => {
+      if (snapshot.exists()){
+          snapshot.forEach(child=>
+              {this.setState({adminUID:child.key})})}});
   
   
     fire.auth().onAuthStateChanged((user)=> {
@@ -40,8 +51,21 @@ class Navigation extends Component{
         
         var userID = user.uid
 
+        if(userID===this.state.adminUID){
 
-        var ref = fire.database().ref("Users").child(userID)
+          var User = 'admin';
+
+          this.setState({authenticated:true,
+            userType: User,
+            headerShow:true,
+             })    
+             console.log(this.state.authenticated + " "+ this.state.userType)
+
+        }
+
+        else{
+
+          var ref = fire.database().ref().child("Users").child(this.state.adminUID).child("Recruiters").child(userID);
 
         var type = ref.on('value', snap=>{
                
@@ -59,6 +83,11 @@ class Navigation extends Component{
 
           console.log(this.state.authenticated + " "+ this.state.userType)
            })
+          
+        }
+
+       
+        
 
    
         }
@@ -79,7 +108,8 @@ render(){
 
             <Router>
               <Header user={this.state.userType} authenticated={this.state.authenticated}/>
-              <div className="App" style={"style",{"margin":50,}}>
+          
+             
               <Switch>
               <Route path='/' component={LoginForm} exact/>
               <Route path='/signup' component={SignUp} exact/>
@@ -90,16 +120,22 @@ render(){
 
                 {this.state.authenticated && this.state.userType === 'generalstudies' && <Route exact path='/generalstudies' component={GeneralStudies} />}
 
-                {this.state.authenticated && this.state.userType === 'community' && <Route exact path='/community' component={Comuniversity} />}
+                {this.state.authenticated && this.state.userType === 'outreach' && <Route exact path='/outreach' component={OutreachPage} />}
 
                 {this.state.authenticated && this.state.userType === 'collegeprogram' && <Route exact path='/collegeprogram' component={CollegeProgram} />}
 
                 {this.state.authenticated && this.state.userType === 'admin' && <Route exact path='/admin' component={Admin} />}
+
+                {this.state.authenticated && this.state.userType === 'admin' && <Route exact path='/admin/viewrecruiters' component={ManagerRecruiter} />}
+
+              <Route  component={PageNotFound}/>
          
 
               </Switch>
+
             
-              </div>
+             
+              <Footer />
     
           </Router>
 

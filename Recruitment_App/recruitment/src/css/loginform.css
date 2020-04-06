@@ -1,0 +1,130 @@
+.imageContainer{
+
+
+    /* Full height */
+  width: 100%;
+  height:100%;
+  position: relative;
+  border-radius: 0;
+
+}
+
+.homepageButton{
+
+    width: 100%;
+    height:50px;
+    background-color: rgb(45,128,210);
+    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 24px;
+    color:white;
+    border: solid 2px  rgb(45,128,210);
+    border-radius: 2%;
+
+
+}
+.errorText{
+    font-size: 18px;
+    color:rgb(136, 3, 8);
+    margin-bottom: 0px;
+    text-transform: capitalize;
+    font-family: "Open Sans",Arial,sans-serif;
+  
+}
+.loginText{
+
+    margin-top:20px;
+    margin-bottom: 40px;
+
+}
+#emailHelp{
+    color: white;
+
+}
+.signupContainer{
+   
+   align-self:end;
+    width:400px;
+    background-color:  rgb(45,128,210);
+    padding-left:35px;
+    border: solid 1px  rgb(0,38,76);
+    color: white;
+    border-radius: 5%;
+
+    
+}
+
+.signupContainer input{
+    margin:10px;
+    height:50px;
+    margin:1px;
+    border: white;
+    border: solid 1px  rgb(0,38,76);
+
+    text-align: center;
+}
+
+.loginContainer{
+    width:400px;
+    background-color:  rgb(45,128,210);
+    padding:45px;
+    color: white;
+    border: solid 1px  rgb(0,38,76);
+    border-radius: 5%;
+    position: absolute;
+    top:200px; 
+    left:auto;
+
+    
+}
+.SignUp{
+
+    position: absolute;
+    top:150px; 
+    left:0;
+
+}
+
+.loginContainer input{
+    margin:10px;
+    height:50px;
+    margin:2px;
+    border-bottom: black;
+    border: solid 1px  rgb(0,38,76);
+    text-align: center;
+}
+#emailHelp{
+    color: white;
+
+}
+.loginButton{
+    margin:20px;
+    height: 40px;
+    color:white;
+    background-color: rgb(0,38,76) ;
+
+}
+
+.buttonContainer{
+   background-color:rgb(0,38,76) ;
+   color:white ;
+   margin: 0;
+
+   width:100%;
+    
+}
+
+.homepageCursive{
+    font-family: "Shadows Into Light",cursive;
+    font-size: 1.6em;
+    font-style: italic;
+    color:rgb(45,128,210)
+}
+
+.buttonCol{
+    padding: 30px;
+}
+p Link{
+    text-decoration: none;
+    color:white;
+}
+

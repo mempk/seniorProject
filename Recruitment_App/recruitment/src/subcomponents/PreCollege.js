@@ -1,23 +1,19 @@
 import React,{Component} from 'react';
-import Header from "./Header";
+import PrecollegeForm from '../precollegeForms/PrecollegeForm';
 
 
 class PreCollege extends Component {
 
-
     render(){
-
+        
         return(
 
-          <React.Fragment>
+            <>
+            <div className="App" style={"style",{"margin":50,}}>
 
-
-              This is Pre College Page
-
-
-          </React.Fragment>
-
-
+            <PrecollegeForm />
+            </div>
+            </>
         )
     }
 

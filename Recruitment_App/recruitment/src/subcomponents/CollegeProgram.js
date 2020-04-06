@@ -1,27 +1,21 @@
 import React,{Component} from 'react';
-import Header from "./Header";
+import CollegeProgramFormAll from '../CollegeProgramForms/CollegeProgramFormAll';
+
 
 
 class CollegeProgram extends Component {
 
 
-    render(){
+  render(){
+    return(
 
-        return(
-
-          <React.Fragment>
-    
-
-             This is CollegeProgram page
-
-
-          </React.Fragment>
-
-
-        )
-    }
-
-
-}
+      <>
+      <div className="App" style={"style",{"margin":50,}}>
+      <CollegeProgramFormAll />
+      </div>
+      </>
+    )
+  }
+} 
 
 export default CollegeProgram;
