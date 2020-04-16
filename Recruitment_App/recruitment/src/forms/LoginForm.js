@@ -22,7 +22,7 @@ class LoginForm extends Component{
         this.loginAuth= this.loginAuth.bind(this);
         this.handleChange= this.handleChange.bind(this);
 
-        this.state= { email: '', password: '', authenticated:'', userType:'',showLoginError:false,showLogin:false,adminUID:''}
+        this.state= { email: '', password: '', authenticated:'', userType:'',showLoginError:false,showLogin:false,adminUID:'',showAdmin:true}
        
     }
 
@@ -30,7 +30,8 @@ class LoginForm extends Component{
         fire.database().ref("Users").orderByChild("userType").equalTo("Admin").on("value",snapshot => {
             if (snapshot.exists()){
                 snapshot.forEach(child=>
-                    {this.setState({adminUID:child.key})})}})
+                    {this.setState({adminUID:child.key})})
+                    this.setState({showAdmin:false})}})
         this.handleChange.bind(this);
         this.loginAuth.bind(this);
         fire.auth().signOut().then(()=> {
@@ -68,6 +69,10 @@ class LoginForm extends Component{
 
             this.setState({authenticated:true, userType: User})
 
+            let obj={authenticated:this.state.authenticated,userType:this.state.userType}
+            sessionStorage.setItem('mySessionStorageData', JSON.stringify(obj));
+
+            
             this.props.history.push(`/${User}`)
             
     
@@ -89,6 +94,9 @@ class LoginForm extends Component{
              User = User.toLowerCase();
  
              this.setState({authenticated:true, userType: User})
+
+            let obj={authenticated:this.state.authenticated,userType:this.state.userType}
+            sessionStorage.setItem('mySessionStorageData', JSON.stringify(obj));
  
              this.props.history.push(`/${User}`)
              
@@ -104,9 +112,13 @@ class LoginForm extends Component{
        
 
         
-        }).catch((error)=>{
-            this.setState({showLoginError:true})
-            console.log(error);
+        }).catch((err)=>{
+
+            if(err){
+                document.querySelector(".signUpError").innerHTML=err.message;
+
+            }
+           
         }) 
     }
 
@@ -114,7 +126,7 @@ class LoginForm extends Component{
 
     showLoginForm=(e)=>{
         e.preventDefault();
-        this.setState({showLogin:true})
+        this.setState({showLogin:!this.state.showLogin})
     }
 
     
@@ -132,14 +144,35 @@ class LoginForm extends Component{
         return(
 
             
-
+            <>  
                 
 
-<>
 
             
         <img className="imageContainer" src={background} alt="background"/>
-        <div className="buttonContainer">   
+        <div className="buttonContainer">  
+                                {!this.state.showAdmin &&
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-lg-8 col-md-8 col-sm-11">
+                                            <h3 className="homepageCursive text-center ">Learning Experiences for Everyone</h3>
+                                            <p className="text-center">The Division of Outreach and Continuing Education at the University of Mississippi</p>
+                                        
+            
+                                        </div>
+                                        <div className="buttonCol col-lg-3 col-md-3 col-sm-11">
+            
+                                            <button className="homepageButton1" onClick={this.showLoginForm}>Log In</button>
+            
+            
+                                        </div>
+                                        
+                                       
+                                    </div>
+                            
+                                </div>}
+
+                                {this.state.showAdmin &&
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-lg-6 col-md-6 col-sm-11">
@@ -154,16 +187,16 @@ class LoginForm extends Component{
             
             
                                         </div>
+                                        {this.state.showAdmin &&
                                         <div className="buttonCol col-lg-3 col-md-3 col-sm-11">
             
                                         <Link style={{color:'rgb(0,38,76)'}}to='/signup'><button className="homepageButton">Sign Up</button></Link>
             
             
-                                        </div>
+                                        </div>}
                                     </div>
                             
-                                </div>
-                    </div>
+                                </div>}
         <div className="App" style={"style",{"margin":50,}}>
                 
 
@@ -176,7 +209,7 @@ class LoginForm extends Component{
     
                                
                                 <h4 className="loginText text center">Log In</h4>
-                                {this.state.showLoginError && <p className="errorText">Incorrect Email/Password</p>}
+                                <p class="signUpError center-align "></p>
                                 <input value={this.state.email} onChange={this.handleChange} name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address"/>
                                 
                             
@@ -185,8 +218,10 @@ class LoginForm extends Component{
                             
                                 <button type="submit" style ={{width:'50%'}}onClick={this.loginAuth} className="loginButton">Continue</button>
                        
-                            
-                                <p>Don't have an account? <Link style={{color:'rgb(0,38,76)'}}to='/signup'>Sign Up</Link></p>
+                                {this.state.showAdmin &&
+                                <p>Don't have an account? <Link style={{color:'rgb(0,38,76)'}}to='/signup'>Sign Up</Link></p>}
+
+                                <p><Link style={{color:'rgb(0,38,76)'}}to='/forgotpassword'>Forgot Your Password</Link></p>
 
                                
             
@@ -199,11 +234,11 @@ class LoginForm extends Component{
 
 
              
-
+                                    </div>
         
     </div>
-</>
-            
+
+       </>     
         )
 
 

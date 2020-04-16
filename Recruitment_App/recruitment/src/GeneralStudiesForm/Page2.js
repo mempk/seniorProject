@@ -34,9 +34,9 @@ class Page2 extends Component{
 
                     <br>
                     </br>
-                    <label>I am :
+                    <label className="ro-text">I am &nbsp;
                        
-                        <select
+                        <select 
                         name="gswhoyouAre" 
                         onChange =  {handleChange('gswhoyouAre')}
                         >
@@ -56,7 +56,7 @@ class Page2 extends Component{
                         <br></br>
                         <h1> You Chose {whoyouare1} Option</h1>
                         <br></br>
-                        <label class="ro-text">Current year in school:
+                        <label class="ro-text">Current year in school &nbsp;
                         <select
                         name="gscurrentYearInSchool" 
                         onChange =  {handleChange('gscurrentYearInSchool')}

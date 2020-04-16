@@ -8,7 +8,8 @@
     margin-bottom: 30px;
     margin-top: 30px;
     color:rgb(45,128,210);
-    background-color: rgb(0,0,0,0.05);
+    background-color: rgb(0,0,0,0.05);;
+    
 }
 
 .adminCard{
@@ -43,7 +44,9 @@ label{
     width: 100%;
     font-size: larger;
     text-align: left;
-    color:rgb(45,128,210);
+    color:rgb(0,38,76);
+    margin-left: 10px;
+    
   
    
 
@@ -61,6 +64,24 @@ input{
     
    
 }
+.signUpError{
+    font-size:larger;
+    color:rgb(136, 3, 8);
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.signUpSuccess{
+
+    font-size:larger;
+    color:rgb(27, 52, 3);
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
 
 select label{
     text-align: center;
@@ -68,12 +89,12 @@ select label{
 
 select{
   
-    margin:20px;
-    border:solid 2px rgb(33,60,116);
-    background-color:  rgb(45,128,210);
-    color:white;
-    height:40px;
-    width: 50%;
+    box-shadow: 0 20px 20px -20px rgb(45,128,210);
+    padding: 3px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    color:rgb(45,128,210);
+    background-color: rgb(0,0,0,0.05);
     
     
 }
@@ -88,6 +109,24 @@ button.form{
   
    
     background-color:rgb(45,128,210) ;
+    padding:5px 15px;
+    font-size: large;
+    margin: 15px;
+}
+
+button.formSucess{
+  
+   
+    background-color:rgb(12, 104, 7) ;
+    padding:5px 15px;
+    font-size: large;
+    margin: 15px;
+}
+
+button.formSucess:hover{
+  
+   
+    background-color:rgb(12, 104, 7) ;
     padding:5px 15px;
     font-size: large;
     margin: 15px;

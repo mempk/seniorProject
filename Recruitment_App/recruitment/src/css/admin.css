@@ -30,7 +30,9 @@ h4.adminDashBoard{
 .card-text{
     font-size: medium;
 }
-
+.card-text-admin{
+    font-size: large;
+}
 h2{
     color: rgb(0,38,76);
 
@@ -57,4 +59,104 @@ img{
     color: white;
     background-color: rgb(0,38,76);
     zoom: 110%;
+}
+.recruiterDetails{
+ 
+    
+    padding: 6px;
+    font-size:large;
+    color:black;
+    background-color: white;
+    
+
+}
+.detailText{
+    padding: 4px;
+   
+}
+
+.recruiterName{
+
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+.name{
+    font-weight: bolder;
+}
+
+.recruiterDetails img{
+    height: 20;
+    margin:0px;
+
+}
+.Downloadbutton{
+    
+    background-color: rgb(45,128,210);
+    color:white;
+    padding:10px;
+    border-radius: 5%;
+  
+}
+.deleteButton{
+
+    background-color:rgb(0,0,0,0.05) ;
+    height:40px;
+    width:40px;
+    border: solid 2px black;
+}
+
+.deleteButton:hover{
+
+    background-color:rgb(0,0,0,0.05) ;
+    height:40px;
+    width:40px;
+    border: solid 2px black;
+    zoom: 1.15;
+}
+.deleteIcon{
+
+    width:100%;
+    margin:0px;
+    padding: 1px;
+
+}
+.recruiterContainer{
+    
+     padding:2px;
+     border-radius: 5%;
+}
+
+
+.flexContent{
+     
+    border: solid  rgb(0,38,76) 2px;
+    width: fit-content;
+
+}
+
+.btnAdmin{
+
+    color: white;
+    background-color: rgb(0,38,76);
+    float: right;
+    padding: 10px;
+    border-radius: 5%;
+    margin: 0;
+
+}
+.btnAdmin:hover{
+
+    color: white;
+    background-color: rgb(0,38,76);
+    float: right;
+    padding: 10px;
+    border-radius: 5%;
+    margin: 0;
+    text-decoration: none;
+    zoom: 1.15;
+
+}
+
+.detailText{
+    padding-top: 9px;
 }

@@ -22,6 +22,25 @@
 
 
 }
+.homepageButton1
+
+{
+    margin: 0;
+    width: 100%;
+    height:50px;
+    background-color: rgb(45,128,210);
+    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 24px;
+    color:white;
+    border: solid 2px  rgb(45,128,210);
+    border-radius: 2%;
+
+
+}
+
+
+
+
 .errorText{
     font-size: 18px;
     color:rgb(136, 3, 8);
@@ -36,15 +55,27 @@
     margin-bottom: 40px;
 
 }
+
+.loginText1{
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 40px;
+    text-transform: capitalize;
+ 
+    font-size: xx-large;
+
+}
 #emailHelp{
     color: white;
 
 }
 .signupContainer{
    
-   align-self:end;
+    align-self:center;
+    margin-left: auto;
+    margin-right: auto;
     width:400px;
-    background-color:  rgb(45,128,210);
+    background-color:  rgb(45,128,210,0.5);
     padding-left:35px;
     border: solid 1px  rgb(0,38,76);
     color: white;
@@ -65,14 +96,30 @@
 
 .loginContainer{
     width:400px;
-    background-color:  rgb(45,128,210);
+    background-color:  rgb(45,128,210,0.5);
     padding:45px;
     color: white;
-    border: solid 1px  rgb(0,38,76);
+    border: solid 1px  white;
     border-radius: 5%;
     position: absolute;
     top:200px; 
     left:auto;
+
+    
+}
+
+
+.loginContainer1{
+   margin-top: 200px;
+   margin-bottom: 250px;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding:45px;
+    color: rgb(0,38,76);
+    border: solid 1px  white;
+    border-radius: 5%;
+   
 
     
 }
@@ -102,6 +149,20 @@
     color:white;
     background-color: rgb(0,38,76) ;
 
+}
+.loginButton1{
+
+    display: block;
+    margin: auto;
+    width: 60%;
+    height: 45px;
+    color:white;
+    background-color: rgb(0,38,76) ;
+
+}
+.loginContainer1 input{
+    height: 45px;
+    margin:30px;
 }
 
 .buttonContainer{

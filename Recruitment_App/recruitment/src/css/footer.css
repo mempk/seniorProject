@@ -2,12 +2,21 @@
     width: 100%;
     background-color: rgb(0,38,76);
     color:rgba(198, 194, 194, 0.988);
+ 
+    left: 0;
+    bottom: 0;
+    right: 0;
+  
+
+   
+    
 }
 
 .container{
     padding:30px;
     
     font-family: "Open Sans",Arial,sans-serif;
+    
 }
 
 .contact{

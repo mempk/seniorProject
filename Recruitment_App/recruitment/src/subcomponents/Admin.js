@@ -7,7 +7,9 @@ import admin from "../css/admin.css";
 import adminIcon from "../images/admin.png"
 import recruiterIcon from "../images/reruiter.png";
 import dataIcon from "../images/data.png";
-import AddAdmin from '../forms/AddAdmin';
+import AddAdmin from '../forms/GetRecruiters';
+import ViewRecruiters from './ViewRecruiters';
+
 
 
 
@@ -20,6 +22,7 @@ class Admin extends Component {
         super(props);
         this.handleChange= this.handleChange.bind(this);
         this.signUpAuth= this.signUpAuth.bind(this);
+        this.showDetailsAction = this.showDetailsAction.bind(this);
      
         this.state={
 
@@ -28,9 +31,16 @@ class Admin extends Component {
             firstPassword:'',
             confirmedPassword:'',
             userType:'admin',
+           
         
 
         }
+    }
+
+    state={
+
+        showDetails:'false',
+
     }
     
 
@@ -46,6 +56,9 @@ class Admin extends Component {
                 name: this.state.name
             };
             fire.database().ref().child("Users").child(UID).set(postData);
+            fire.auth().signOut().then(()=> {
+             
+            });
            
          
             
@@ -65,10 +78,21 @@ class Admin extends Component {
         console.log("color Changed")
     }
 
+    showDetailsAction=()=>e=>{
+
+        const {showDetails}= this.state;
+
+        e.preventDefault();
+        this.setState({showDetails: !showDetails})
+
+    }
+
   
 
 
     render(){
+
+        const {showDetails} = this.state;
        
 
         return(
@@ -81,54 +105,54 @@ class Admin extends Component {
 
                 
 
-              <h2 className="text-center adminDashBoard">Welcome To Admin Dashboard</h2>
+              <h3 className="text-center adminDashBoard">Welcome To Admin Dashboard</h3>
              
               <br/>
 
 
-              <div className="row">
-
-                  <div className="col-lg-4 col-md-6 col-sm-11 margin-20px">
+              
+                <div>
+                    
+                </div>
+                  
 
                   
-                    <div class="card adminCard">
-                        <div class="card-body">
-                            
-                            <p class="card-text"><b>View And Manage Recruiter Here</b></p>
-                            <Link to='admin/viewrecruiters' class="btn"><b>Click Here to Manage</b></Link>
+                    <div class="adminCard">
+                        <div class="row card-body">
+                        
+                        <div className="col-lg-9 col-md-9 col-sm-12 text-left"><p class="card-text-admin"><b>View And Manage Recruiter Here</b></p></div>
+                        <div className="col-lg-1 col-md-1 col-sm-0"></div>
+                        <div className="col-lg-2 col-md-2 col-sm-12 text-center"><button onClick={this.showDetailsAction()} className="btnAdmin"><b>Click Here</b></button></div>
                         </div>
                     </div>
-                  
-                  </div>
-
-                 
-
-                  <div className="col-lg-4 col-md-6 col-sm-11 margin-20px">
+                    { showDetails &&
+                    <ViewRecruiters />
+                    }
 
                                     
-                    <div class="card adminCard">
-                        <div class="card-body">
-                           
-                            <p class="card-text"><b>Add New Admin To The System</b></p>
-                            <a href="#" class="btn" data-toggle="modal" data-target="#AddAdminModal"><b>Click Here to Add</b></a>
-                        </div>
-                    </div>
 
-                </div>
+                
 
-                <div className="col-lg-4 col-md-6 col-sm-11 margin-20px">
+                
 
                                                         
-                <div class="card adminCard">
-                    <div class="card-body">
+                <div class="adminCard">
+                  
+
+                    <div class="row card-body">
+                        
+                        <div className="col-lg-9 col-md-9 col-sm-12 text-left"> <p class="card-text-admin"><b>View and Retrieve Data</b></p></div>
+                        <div className="col-lg-1 col-md-1"></div>
+                        <div className="col-lg-2 col-m2-3 col-sm-12 text-center"><Link to="/admin/viewdata" class="btnAdmin"><b>Click Here</b></Link></div>
+                        
                     
-                        <p class="card-text"><b>View and Retrieve Data</b></p>
-                        <a href="#" class="btn"><b>Click Here to Access Data</b></a>
+                       
+                        
                     </div>
                 </div>
 
-                </div>
-              </div>
+               
+              
 
 
                
@@ -163,7 +187,12 @@ class Admin extends Component {
 
               </div>
 
-        </div>
+
+
+             
+        
+
+            </div>
             </>
 
 

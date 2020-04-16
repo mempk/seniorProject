@@ -1,14 +1,13 @@
 import React ,{ Component,useState} from 'react';
-import {Link} from 'react-router-dom';
 import fire from '../auth/firebase';
-import form from '../css/form.css';
-
-import { withRouter } from 'react-router-dom';
+import fire2 from '../auth/firebase1';
 
 
 
 
-class SignUpForm extends Component{
+
+
+class AddAdminForm extends Component{
 
 
     constructor(props){
@@ -16,6 +15,8 @@ class SignUpForm extends Component{
         super(props);
         this.handleChange= this.handleChange.bind(this);
         this.signUpAuth= this.signUpAuth.bind(this);
+       
+
         this.state={
 
             firstName:'',
@@ -58,18 +59,16 @@ class SignUpForm extends Component{
 
 
 
-    
-
-   
-
-
-
-
     signUpAuth =e=>{
         
         e.preventDefault();
         if(this.state.showAdmin === false){
-        fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.confirmedPassword).then((data)=>{
+
+
+           
+
+
+        fire2.auth().createUserWithEmailAndPassword(this.state.email,this.state.confirmedPassword).then((data)=>{
             var UID = data.user.uid;
             var postData ={
                 
@@ -79,41 +78,34 @@ class SignUpForm extends Component{
                 userType: this.state.userType,
 
             };
-            fire.database().ref().child("Users").child(this.state.adminUID).child("Recruiters").child(UID).set(postData).then();
-            fire.auth().signOut().then(()=> {
-             
-            });
+            fire2.database().ref().child("Users").child(this.state.adminUID).child("Recruiters").child(UID).set(postData);
          
+                document.querySelector(".signUpError").innerHTML='';
             
-            this.props.history.push('/');
+
+                document.querySelector(".successText").innerHTML='New recruiter successfully added.';
+
+            }).catch(err =>{
+
+                if(err){
+                    document.querySelector(".successText").innerHTML='';
+                    document.querySelector(".signUpError").innerHTML=err.message;
+
+                }
+                
+
 
             })
+            
+            fire2.auth().signOut()
+            
+
+         
 
            
 
             
             
-        }
-
-        else {
-            fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.confirmedPassword).then((data)=>{
-                var UID = data.user.uid;
-                var postData ={
-                    firstName: this.state.firstName,
-                    lastName:this.state.lastName,
-                    email: this.state.email,
-                    userType: this.state.userType,
-                };
-                fire.database().ref().child("Users").child(UID).set(postData);
-                fire.auth().signOut().then(()=> {
-                 
-                });
-             
-                
-                this.props.history.push('/');
-    
-                })
-
         }
 
     
@@ -131,16 +123,18 @@ class SignUpForm extends Component{
 
         return(
 
-            <div className="App" style={"style",{"margin":50,}}>
 
             <div className="container signupContainer">
-
-            <Link to='/'><button  style={{color:'rgb(0,38,76)'}} type="button" class="close" >
+                
+            <button onClick={closeAddForm()} style={{color:'rgb(0,38,76)'}} type="button" class="close" >
             <span aria-hidden="true">&times;</span>
-            </button></Link>
+            </button>
 
                 <h4 className="loginText text center">Add New Recruiter</h4>
                 {this.state.showAdmin && <h4 className="loginText text center">Create New Admin Account</h4>}
+                <p class="signUpError center-align "></p>
+                <p class="successText text-center " style={{color:'green',fontSize:'large'}}></p>
+
 
 
 
@@ -177,7 +171,7 @@ class SignUpForm extends Component{
     
 
         </div>
-        </div>
+        
 
         )
     }
@@ -190,4 +184,4 @@ class SignUpForm extends Component{
 
 }
 
-export default SignUpForm;
+export default AddAdminForm;

@@ -7,6 +7,8 @@ import form from '../css/form.css';
 import nextArrow from '../images/nextArrow.png';
 import backArrow from '../images/backArrow.png';
 import RecruiterInfo from './RecruiterInfo';
+import ThankYouPage from '../subcomponents/ThankYouPage';
+import axios from 'axios';
 
 
 
@@ -22,6 +24,14 @@ class CollegeProgramFormAll extends Component{
             step: 1,
             eventInfo: true,
             showRest: false,
+            showThankYou:false,
+
+            //Recruiters Info
+
+            recruiterFirstName:'',
+            recruiterLastName:'',
+            recruiterProgram:'',
+            recruiterEmailID:'',
 
              //Event Info
             cpEventName:'',
@@ -171,11 +181,188 @@ class CollegeProgramFormAll extends Component{
 
     }
 
-    moveToFirstPage=()=>{
+    showSubmitStep=()=>{
 
         const {step} = this.state;
+        if(step === 1 ||step === 2 ||step === 3 || step === 4 )
+            return ( <div><br></br><button onClick={this.moveToFirstPage} className="btn btn-primary-success formSucess">Thanks so much for sharing with us!</button>
+                     {}</div>
+            );
 
-        this.setState({ step: 1});
+    }
+
+    moveToFirstPage=()=>{
+
+        
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+      setTimeout(() => {
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+        
+          
+      },3000);
+
+      this.setState({ step: 1});
+
+      axios.post('http://localhost:4000/generalstudies',{
+
+
+        recruiterFirstName:this.state.recruiterFirstName,
+    
+        recruiterLastName: this.state.recruiterLastName,
+    
+        recruiterProgram:this.state.recruiterProgram,
+    
+        recruiterEmailID:this.state.recruiterEmailID,
+    
+        eventName:this.state.cpEventDate,
+    
+        eventSponsor:this.state.cpSponsoringOrganization,
+    
+        eventDate:this.state.cpEventDate,
+    
+        eventState:this.state.cpEventDate,
+
+        eventCity:this.state.cpLocationCity,
+    
+        eventCountry:this.state.cpLocationCountry,
+    
+    
+        clientFirstName:this.state.cpfirstName,
+    
+        clientLastName:this.state.cplastName,
+    
+        clientEmailAddress:this.state.cpemailAddress,
+    
+        programofInterest:this.state.cpprogOfInterest,
+    
+        whoYouAre:this.state.cpwhoyouAre,
+        
+        currentYearInSchool:this.state.cpcurrentYearInSchool,
+        
+        schoolName:this.state.cpschoolName,
+    
+        schoolYear:this.state.cpschoolYear,
+                
+        schoolhometown:this.state.cphometown,
+
+        stateZipCode:this.state.cpstateCode,
+                
+        childrenName:this.state.cpchildrenName,
+        
+        
+        childrenStateCode:this.state.cpchildrenStateCode,
+    
+        childrenHometown:this.state.cpchildrenHometown,
+
+        advisorSchoolName:this.state.advisorSchoolName,
+
+        advisorDepartment:this.state.advisorDepartment,
+    
+        counselorSchoolName:'',
+
+        InterestedProgram:this.state.cpInterestedProgram,
+    
+        careerInterest:'',
+
+        InterestedMinor:'',
+
+        ageLevel:'',
+        counselorState:'',
+
+        counselorCity:'',
+    
+        teacherGradeLevel:'',
+    
+        teacherSchoolName:'',
+
+    
+        subject:'',
+    
+        teacherCity:'',
+    
+        teacherState:'',
+    
+        otherState:'',
+
+        otherCity:'',
+
+        contactMedium:this.state.cpcontactMedium,
+
+        bestContactTime:this.state.cpbestContactTime,
+
+        phoneNumber:this.state.cpphoneNumber,
+
+        mailAddress1:this.state.cpmailAddress1,
+
+        mailAddress2:this.state.cpmailAddress2,
+
+        mailCity:this.state.cpmailCity,
+
+        mailState:this.state.cpmailState,
+
+        mailZip:this.state.cpmailZip,
+
+
+        topicIdea:this.state.cptopicIdea,
+
+        aboutYou:this.state.cpaboutYou,
+
+        SpecificQuestion:this.state.cpSpecificQuestion,
+    
+        
+
+      }).then((Response)=>{
+          console.log(Response)
+      })
+      .catch((error)=>{
+          console.log(error);
+      })
+
+      this.setState({
+        cpfirstName :'',
+            cplastName : '',
+            cpemailAddress: '',
+            cpprogOfInterest: '',
+
+
+    
+            //Page 2
+            cpwhoyouAre:'',
+            cpcurrentYearInSchool: '',
+            cpschoolName: '',
+            cphometown:'',
+            cpstateCode:'',
+            cpschoolYear: '',
+            cpchildrenName:'',
+            cpchildrenStateCode: '',
+            cpchildrenHometown:'',
+            advisorSchoolName: '',
+            advisorDepartment: '',
+            
+
+            //page3
+
+            cpcontactMedium:'',
+            cpbestContactTime:'',
+            cpphoneNumber:'',
+            cpmailAddress1:'',
+            cpmailAddress2:'',
+            cpmailCity:'',
+            cpmailState:'',
+            cpmailZip:'',
+            cpInterestedProgram:'',
+
+            //page4
+
+            cptopicIdea:'',
+            cpaboutYou:'',
+            cpSpecificQuestion:'',
+    
+      })
      
     }
     
@@ -193,17 +380,16 @@ class CollegeProgramFormAll extends Component{
 
 
             <>
+             <div className="container">
+            
 
-             <div className="App" style={"style",{"margin":50,}}>
-
-            {this.state.eventInfo &&
-
+            {this.state.eventInfo && !this.state.showThankYou &&
              <RecruiterInfo handleChange={this.handleChange} submitEventInfo={this.submitEventInfo}/>}
 
+             {!this.state.showThankYou && this.state.showRest &&
 
-             { this.state.showRest &&
              <>
-               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'55px',width:'160px',color:'white', padding:'10px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
+               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'auto',marginRight:'auto',width:'160px',color:'white', padding:'10px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
 
                 {this.showStep()}
                 <div className='row'>
@@ -218,17 +404,17 @@ class CollegeProgramFormAll extends Component{
                 
                 {this.showSubmitStep()}
 
-                </>}
-
                 
 
-                
+            </>
               
+             }
 
+             {this.state.showThankYou && <ThankYouPage />}
              
 
-                </div>
-
+           
+             </div>
             </>
         )
     }

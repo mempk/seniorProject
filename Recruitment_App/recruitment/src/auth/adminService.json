@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "recruitment-app-d596c",
+  "private_key_id": "a8599c67e65be723d55cc0e4e7e68fc909903e02",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCnWoG0Ek1Y0bFy\nEzpxNwzt4Ey09nlHD9r1S1a9caNpd66qMpXDtmn6DwK3Zx5PnDpLjY8LluTpOY44\ncl3ylRdHjIM/9FNemzCBGf63fUnzgOJqCCOmpPeR+KZCjdyCCXnhSsSRmR91mRWi\nhwCOXjPcX73+cs1Ctxdj50zUwRslvgWeG5ju3nF7oC7uC8alhiOftiCAWBEz66Rh\n8e7pONPEQ5cU135vDq36V3L82QhreGWdvzk4slnqO3MwaCRWl46XAG/EtSDFvOxg\nQtgvrjcAM5rDi+MnSpRGEOdxXCWUc/8h3HLarxmQ8L46sx2BfrdCnSs1mg7GbJYf\nZqBG9E9TAgMBAAECggEABOLWKXd3VF1kGAn4QEaG54nq82oyPWpUPDyalbg9FEyl\n9bYnPBffCxdn9cEjjtgL/xlIYwcX8rhk5cBux3oTcxDCUNEhEW5V71gnztMUxMwd\nGVLYp57mimDIZVPotIapuuFR9Z0lctk7Wwu2k5YZqGHGp7rkDQJQnoLzKL1SmUzh\nbPgnfDu0JGOjL0jzwY1kHs09b1mG+lF2HofXJkGmxyLSpYnJME3xPswZsuWSgdG3\nizhCVqjI06IP6+1SzJhmk5Y7SPTri+DZ/Wt8QV4wxyURPCu3gTQ7AxCfJB9s9Jrx\npItLNawDR1sdbO3/kh76hl/2t7modwn+Kx+vkmgOEQKBgQDhy7mG0mjLR9ftAfez\ngFEOkoi0qJn6T2SINkAVQN8MPc9KSwpSmJkcp5wQE20xzFgTgnyoWQvi3VRMRhd8\njiqf1LK6mSGJ9GK/wNQkdly1YlT4je7bIIsJ7XF+k7SBHnmOUmYomccRt0eYshuh\nxIZ5A8lqwdmos3qnIrTAo1EjlQKBgQC9vXQDr7NB9gnVgRqCqOVFkqI/J24J1w05\nmxdEwQ1hR6A2anv1ULUypyVvgfbesTcmhKMvHxHpLQIy/wUZl8GPsULjQ8jPGCuO\nXmdUY3q7lHLS0fvMib8Du1VMyOYTAat4fGLdrU4LJUuxqhQSVToiiqP51TdLaeLm\n7MYnrtltRwKBgQDQ50WdASrHeI7DzuA3iO51hwlH6/2Z4r5mb5rWjxBOKRmR6N+C\nD4EJS+FN1ktemWqbkkx3DPu8R33om6i7KmUxPv6lOWwYUKzUMDmWCpQ3lOR8mgR1\nZCR/aNlqfImyNFnOXVn7EltlfqaVFaQPBN5NND2zseoI9RTzcV6+I9u8CQKBgA+r\nKX10cPUtgDplYu8PS3+nUEau1uNxIuJy8ET5PEWgSJa1zG7Br3TzYKAIt35EXC2O\nHnuxsST0Vo4niSBH6/AVz1Q9MMQJVu921EmfvW7oH2NRe920MlX4jl686GMBbEuS\n2gc8XImHFu0hAm9RIm/fyxLCjMJpiBdRzjtQsRvZAoGAItideu+SW9jOAMpNiTtf\nXirma/go/pfmn4+lD7pIRUB8KmQj2+vb0loA/o6WmitatyaXanUXjHHZGtPM5EX3\nMnpmOJCcqqr3mb9HxhJBkDGMwgPWnLbhL9M05bCoE/pWOQMb2B/Rag2sBDdanNjN\nOQmc8J8tnaot77YiWmuGCxE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-9zu39@recruitment-app-d596c.iam.gserviceaccount.com",
+  "client_id": "116924537927639328258",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-9zu39%40recruitment-app-d596c.iam.gserviceaccount.com"
+}

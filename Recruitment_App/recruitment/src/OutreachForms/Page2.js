@@ -34,7 +34,7 @@ class Page2 extends Component{
 
                 
     
-                    <label class="ro-text">I am :
+                    <label className="ro-text">I am :
                        
                         <select
                         name="otwhoyouAre" 

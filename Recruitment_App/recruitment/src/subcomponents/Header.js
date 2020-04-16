@@ -25,22 +25,23 @@ class Header extends Component{
         this.signOut = this.signOut.bind(this)
     }
 
-    print=()=>{
-        console.log(this.props.authenticated);
-    }
 
-    signOut=()=>{
 
-  
+    signOut=(e)=>{
+
+        e.preventDefault();
       
         fire.auth().signOut().then(()=> {
 
-           // this.props.history.goBack('/')
 
-
+            sessionStorage.clear();
+            this.props.authenticated = false;
             console.log("User Sign Out");
             
     }
+
+    
+    
 
 
     
@@ -93,13 +94,9 @@ class Header extends Component{
                 <ul className="navbar-nav  ml-auto mr-3 mt-2 mt-lg-0">
                 
 
-                {this.props.authenticated && <li className="nav-item logOut"><a style={{color:'rgb(0,38,76)'}} className="nav-item nav-link" onClick={this.signOut} href='/' >Log Out</a></li>}
+                {this.props.authenticated && <li className="nav-item logOut"><a style={{color:'rgb(0,38,76)'}} className="nav-item nav-link" onClick={this.signOut} ><Link to="/">Log Out</Link></a></li>}
                 {!this.props.authenticated && <li className="nav-item"><a className="nav-item nav-link" ><Link to='/'>Log In</Link></a></li>}
-                {!this.props.authenticated && <li className="nav-item"><a className="nav-item nav-link"  ><Link to ='/signup'>Sign Up</Link></a></li>}
 
-
-                    
-                    
         
                 </ul>
                 </div>

@@ -14,9 +14,80 @@ class RecruiterInfo extends Component{
         return(
             <>
             
-            <div class="container formContainer"> 
+        <div class="container formContainer"> 
 
-            <h4>Enter Event Information here</h4>
+            <h4>Enter Your And Event Information Here</h4>
+
+          
+
+               
+
+                    <label>First Name:
+                    <input
+
+                    type="text"
+                    name = "recruiterFirstName"
+                    placeholder="Enter First Name "
+                    onChange={handleChange('recruiterFirstName')}
+
+                    />
+                    </label>
+
+
+            
+
+         
+
+                    <label>Last Name:
+                    <input
+
+                    type="text"
+                    name = "recruiterLastName"
+                    placeholder="Enter Last Name "
+                    onChange={handleChange('recruiterLastName')}
+
+                    />
+                    </label>
+
+
+          
+
+
+
+
+       
+
+
+            <label class="ro-text">Your Program Type &nbsp;
+                        <select
+                        name="recruiterProgram" 
+                        onChange =  {handleChange('recruiterProgram')}
+                        >
+                        <option value="">Select your program type</option>
+                        <option value="College Program">College Program</option>
+                        <option value="Outreach">Division of Outreach</option>
+                        <option value="General Studies">General Studies</option>
+                        <option value="Pre College">Pre College</option>
+                 
+                    
+         
+
+                        </select>
+                        
+            </label>
+
+            <label>Your Email Address:
+                <input
+
+                type="text"
+                name = "recruiterEmailID"
+                placeholder="Enter your email address "
+                onChange={handleChange('recruiterEmailID')}
+
+                />
+            </label>
+
+    
 
 
             <label>Event Name:

@@ -6,14 +6,14 @@ class Page3 extends Component{
 
     render(){
         const {handleChange} = this.props;
-        const {gscontactMedium} = this.props;
+        const {contactMedium} = this.props;
 
         return(
             <div className="container formContainer">
 
                 <h1>Page 3</h1>
 
-                <label class="ro-text">I Prefer to be contacted via:
+                <label class="ro-text">I Prefer to be contacted via &nbsp;
                         <select
                         name="gscontactMedium" 
                         onChange =  {handleChange('gscontactMedium')}
@@ -30,10 +30,10 @@ class Page3 extends Component{
                 </label>
 
                 
-                {gscontactMedium === "Phone Call" && 
+                {contactMedium === "Phone Call" && 
                     <div>
                     <br></br>
-                        <h1> You Chose {gscontactMedium} Option</h1>
+                        <h1> You Chose {contactMedium} Option</h1>
                         <br></br>
 
                     <label>Phone Number:
@@ -65,10 +65,10 @@ class Page3 extends Component{
 
                     </div>}
 
-                    {gscontactMedium === "Text Message" && 
+                    {contactMedium === "Text Message" && 
                     <div>
                     <br></br>
-                        <h1> You Chose {gscontactMedium} Option</h1>
+                        <h1> You Chose {contactMedium} Option</h1>
                         <br></br>
 
                     <label>Phone Number:
@@ -103,10 +103,10 @@ class Page3 extends Component{
 
 
 
-                    {gscontactMedium === "Mail" && 
+                    {contactMedium === "Mail" && 
                     <div>
                     <br></br>
-                        <h1> You Chose {gscontactMedium} Option</h1>
+                        <h1> You Chose {contactMedium} Option</h1>
                         <br></br>
                   
 
@@ -179,7 +179,7 @@ class Page3 extends Component{
                     <br>
                     </br>
 
-                    <label class="ro-text">I am interested in information about:
+                    <label class="ro-text">I am interested in information about &nbsp;
                         <select
                         name="gsInterestedProgram" 
                         onChange =  {handleChange('gsInterestedProgram')}

@@ -7,7 +7,8 @@ import form from '../css/form.css';
 import nextArrow from '../images/nextArrow.png';
 import backArrow from '../images/backArrow.png';
 import RecruiterInfo from './RecruiterInfo';
-
+import ThankYouPage from '../subcomponents/ThankYouPage';
+import axios from 'axios';
 
 
 
@@ -22,7 +23,14 @@ class PrecollegeForm extends Component{
             step: 1,
             eventInfo: true,
             showRest: false,
+            showThankYou:false,
 
+            //Recruiters Info
+
+            recruiterFirstName:'',
+            recruiterLastName:'',
+            recruiterProgram:'',
+            recruiterEmailID:'',
 
             //Event Info
             pcEventName:'',
@@ -184,16 +192,200 @@ class PrecollegeForm extends Component{
 
     }
 
-    moveToFirstPage=()=>{
+    showSubmitStep=()=>{
 
         const {step} = this.state;
+        if(step === 1 ||step === 2 ||step === 3 || step === 4 )
+            return ( <div><br></br><button onClick={this.moveToFirstPage} className="btn btn-primary-success formSucess">Thanks so much for sharing with us!</button>
+                     {}</div>
+            );
 
-        this.setState({ step: 1});
+    }
+
+    moveToFirstPage=()=>{
+
+        const {showThankYou}= this.state;
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+      setTimeout(() => {
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+        
+          
+      },3000);
+
+      this.setState({ step: 1});axios.post('http://localhost:4000/generalstudies',{
+
+
+        recruiterFirstName:this.state.recruiterFirstName,
+    
+        recruiterLastName: this.state.recruiterLastName,
+    
+        recruiterProgram:this.state.recruiterProgram,
+    
+        recruiterEmailID:this.state.recruiterEmailID,
+    
+        eventName:this.state.pcEventDate,
+    
+        eventSponsor:this.state.pcSponsoringOrganization,
+    
+        eventDate:this.state.pcEventDate,
+    
+        eventState:this.state.pcEventDate,
+
+        eventCity:this.state.pcLocationCity,
+    
+        eventCountry:this.state.pcLocationCountry,
+    
+    
+        clientFirstName:this.state.firstName,
+    
+        clientLastName:this.state.lastName,
+    
+        clientEmailAddress:this.state.emailAddress,
+    
+        programofInterest:this.state.progOfInterest,
+    
+        whoYouAre:this.state.whoyouAre,
+        
+        currentYearInSchool:this.state.currentYearInSchool,
+        
+        schoolName:this.state.schoolName,
+    
+        schoolYear:this.state.schoolYear,
+                
+        schoolhometown:this.state.hometown,
+
+        stateZipCode:this.state.stateCode,
+                
+        childrenName:this.state.childrenName,
+        
+        
+        childrenStateCode:this.state.childrenStateCode,
+    
+        childrenHometown:this.state.childrenHometown,
+
+        advisorSchoolName:'',
+
+        advisorDepartment:'',
+    
+        counselorSchoolName:this.state.counselorSchoolName,
+
+        InterestedProgram:'',
+    
+        careerInterest:'',
+
+        InterestedMinor:'',
+
+        ageLevel:this.state.ageLevel,
+
+        counselorState:this.state.counselorState,
+
+        counselorCity:this.state.counselorCity,
+    
+        teacherGradeLevel:this.state.teacherGradeLevel,
+    
+        teacherSchoolName:this.state.teacherSchoolName,
+
+    
+        subject:this.state.subject,
+    
+        teacherCity:this.state.teacherCity,
+    
+        teacherState:this.state.teacherState,
+    
+        otherState:this.state.otherState,
+
+        otherCity:this.state.otherCity,
+
+        contactMedium:this.state.contactMedium,
+
+        bestContactTime:this.state.bestContactTime,
+
+        phoneNumber:this.state.phoneNumber,
+
+        mailAddress1:this.state.mailAddress1,
+
+        mailAddress2:this.state.mailAddress2,
+
+        mailCity:this.state.mailCity,
+
+        mailState:this.state.mailState,
+
+        mailZip:this.state.mailZip,
+
+
+        topicIdea:this.state.topicIdea,
+
+        aboutYou:this.state.aboutYou,
+
+        SpecificQuestion:this.state.SpecificQuestion,
+    
+        
+
+      }).then((Response)=>{
+          console.log(Response)
+      })
+      .catch((error)=>{
+          console.log(error);
+      })
+
+      this.setState({
+      //page 1
+      firstName :'',
+      lastName : '',
+      emailAddress: '',
+      progOfInterest: '',
+
+
+
+      //Page 2
+      whoyouAre:'',
+      currentYearInSchool: '',
+      schoolName: '',
+      hometown:'',
+      stateCode:'',
+      schoolYear: '',
+      childrenName:'',
+      childrenStateCode: '',
+      childrenHometown:'',
+      counselorSchoolName: '',
+      ageLevel: '',
+      counselorState:'',
+      counselorCity:'',
+      teacherGradeLevel:'',
+      teacherSchoolName:'',
+      subject:'',
+      teacherCity:'',
+      teacherState:'',
+      otherState:'',
+      otherCity:'',
+
+
+      //page3
+
+      contactMedium:'',
+      bestContactTime:'',
+      phoneNumber:'',
+      mailAddress1:'',
+      mailAddress2:'',
+      mailCity:'',
+      mailState:'',
+      mailZip:'',
+
+      //page4
+
+      topicIdea:'',
+      aboutYou:'',
+      SpecificQuestion:'',
+
+  
+    
+      })
      
     }
-    
-
-
     render(){
 
         const {step} = this.state;
@@ -206,18 +398,15 @@ class PrecollegeForm extends Component{
 
 
             <>
-
             
-             <div className="App" style={"style",{"margin":50,}}>
 
-            { this.state.eventInfo &&
+            {this.state.eventInfo && !this.state.showThankYou &&
+             <RecruiterInfo handleChange={this.handleChange} submitEventInfo={this.submitEventInfo}/>}
 
-            <RecruiterInfo handleChange={this.handleChange} submitEventInfo={this.submitEventInfo}/> }
+             {!this.state.showThankYou && this.state.showRest &&
 
-            {this.state.showRest &&
-            <>
-
-               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'55px',width:'160px',color:'white', padding:'10px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
+             <>
+               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'auto',marginRight:'auto',width:'160px',color:'white', padding:'10px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
 
                 {this.showStep()}
                 <div className='row'>
@@ -234,14 +423,14 @@ class PrecollegeForm extends Component{
 
                 
 
-                
-                </>}
+            </>
+              
+             }
 
+             {this.state.showThankYou && <ThankYouPage />}
              
 
-                </div>
-               
-              
+           
 
             </>
         )

@@ -1,7 +1,9 @@
 img{
     width: 85%;
 }
-
+img.thankyou{
+    width:40%;
+}
 .notfounderrorText{
 
     margin:30px 10px 10px 10px;

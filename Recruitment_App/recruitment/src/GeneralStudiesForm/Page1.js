@@ -54,7 +54,7 @@ class Page1 extends Component{
             
             <br>
             </br>
-            <label class="ro-text">Program of Interest:
+            <label class="ro-text">Program of Interest &nbsp;
                 <select
                 name="gsprogOfInterest" 
                 onChange =  {handleChange('gsprogOfInterest')}

@@ -7,10 +7,9 @@ import form from '../css/form.css';
 import nextArrow from '../images/nextArrow.png';
 import backArrow from '../images/backArrow.png';
 import RecruiterInfo from './RecruiterInfo';
+import ThankYouPage from '../subcomponents/ThankYouPage';
 
-
-
-
+import axios from 'axios';
 
 
 class OutreachAll extends Component{
@@ -24,6 +23,15 @@ class OutreachAll extends Component{
             step: 1,
             eventInfo: true,
             showRest: false,
+            showThankYou:false,
+
+            //Recruiters Info
+
+            recruiterFirstName:'',
+            recruiterLastName:'',
+            recruiterProgram:'',
+            recruiterEmailID:'',
+
 
 
 
@@ -172,13 +180,191 @@ class OutreachAll extends Component{
 
     }
 
-    moveToFirstPage=()=>{
+    showSubmitStep=()=>{
 
         const {step} = this.state;
+        if(step === 1 ||step === 2 ||step === 3 || step === 4 )
+            return ( <div><br></br><button onClick={this.moveToFirstPage} className="btn btn-primary-success formSucess">Thanks so much for sharing with us!</button>
+                     {}</div>
+            );
 
-        this.setState({ step: 1});
+    }
+
+    moveToFirstPage=()=>{
+
+        const {showThankYou}= this.state;
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+      setTimeout(() => {
+
+        this.setState({showThankYou:!this.state.showThankYou})
+
+        
+          
+      },3000);
+
+      this.setState({ step: 1});
+
+      axios.post('http://localhost:4000/generalstudies',{
+
+
+        recruiterFirstName:this.state.recruiterFirstName,
+    
+        recruiterLastName: this.state.recruiterLastName,
+    
+        recruiterProgram:this.state.recruiterProgram,
+    
+        recruiterEmailID:this.state.recruiterEmailID,
+    
+        eventName:this.state.oEventDate,
+    
+        eventSponsor:this.state.oSponsoringOrganization,
+    
+        eventDate:this.state.oEventDate,
+    
+        eventState:this.state.oEventDate,
+
+        eventCity:this.state.oLocationCity,
+    
+        eventCountry:this.state.oLocationCountry,
+    
+    
+        clientFirstName:this.state.otfirstName,
+    
+        clientLastName:this.state.otlastName,
+    
+        clientEmailAddress:this.state.otemailAddress,
+    
+        programofInterest:this.state.otprogOfInterest,
+    
+        whoYouAre:this.state.otwhoyouAre,
+        
+        currentYearInSchool:this.state.otcurrentYearInSchool,
+        
+        schoolName:this.state.otschoolName,
+    
+        schoolYear:this.state.otschoolYear,
+                
+        schoolhometown:this.state.othometown,
+
+        stateZipCode:this.state.otstateCode,
+                
+        childrenName:this.state.otchildrenName,
+        
+        
+        childrenStateCode:this.state.otchildrenStateCode,
+    
+        childrenHometown:this.state.otchildrenHometown,
+
+        advisorSchoolName:'',
+
+        advisorDepartment:'',
+    
+        counselorSchoolName:'',
+
+        InterestedProgram:'',
+    
+        careerInterest:'',
+
+        InterestedMinor:'',
+
+        ageLevel:'',
+        counselorState:'',
+
+        counselorCity:'',
+    
+        teacherGradeLevel:'',
+    
+        teacherSchoolName:'',
+
+    
+        subject:'',
+    
+        teacherCity:'',
+    
+        teacherState:'',
+    
+        otherState:'',
+
+        otherCity:'',
+
+        contactMedium:this.state.otcontactMedium,
+
+        bestContactTime:this.state.otbestContactTime,
+
+        phoneNumber:this.state.otphoneNumber,
+
+        mailAddress1:this.state.otmailAddress1,
+
+        mailAddress2:this.state.otmailAddress2,
+
+        mailCity:this.state.otmailCity,
+
+        mailState:this.state.otmailState,
+
+        mailZip:this.state.otmailZip,
+
+
+        topicIdea:this.state.ottopicIdea,
+
+        aboutYou:this.state.otaboutYou,
+
+        SpecificQuestion:this.state.otSpecificQuestion,
+    
+        
+
+      }).then((Response)=>{
+          console.log(Response)
+      })
+      .catch((error)=>{
+          console.log(error);
+      })
+
+      this.setState({
+        otfirstName :'',
+        otlastName : '',
+        otemailAddress: '',
+        otprogOfInterest: '',
+
+
+
+        //Page 2
+        otwhoyouAre:'',
+        otcurrentYearInSchool: '',
+        otschoolName: '',
+        othometown:'',
+        otstateCode:'',
+        otschoolYear: '',
+        otchildrenName:'',
+        otchildrenStateCode: '',
+        otchildrenHometown:'',
+       
+
+
+        //page3
+
+        otcontactMedium:'',
+        otbestContactTime:'',
+        otphoneNumber:'',
+        otmailAddress1:'',
+        otmailAddress2:'',
+        otmailCity:'',
+        otmailState:'',
+        otmailZip:'',
+
+        //page4
+
+        ottopicIdea:'',
+        otaboutYou:'',
+        otSpecificQuestion:'',
+
+    
+      })
      
     }
+     
+    
     
 
 
@@ -194,14 +380,15 @@ class OutreachAll extends Component{
 
 
             <>
-             <div className="App" style={"style",{"margin":50,}}>
-            { this.state.eventInfo &&
-             <RecruiterInfo handleChange={this.handleChange} submitEventInfo={this.submitEventInfo}/>
-            }
+            <div className="container">
 
-            {this.state.showRest &&
-                <>
-               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'55px',width:'160px',color:'white', padding:'10px 0px 4px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
+            {this.state.eventInfo && !this.state.showThankYou &&
+             <RecruiterInfo handleChange={this.handleChange} submitEventInfo={this.submitEventInfo}/>}
+
+             {!this.state.showThankYou && this.state.showRest &&
+
+             <>
+               <div style={{backgroundColor:'rgb(45,128,210)',marginLeft:'auto',marginRight:'auto',width:'160px',color:'white', padding:'10px 0px', borderRadius:'5%'}}><h5>Step : {step}/4</h5></div> 
 
                 {this.showStep()}
                 <div className='row'>
@@ -215,18 +402,18 @@ class OutreachAll extends Component{
                 
                 
                 {this.showSubmitStep()}
-                </>
-            }
 
                 
 
-                
+            </>
               
+             }
 
+             {this.state.showThankYou && <ThankYouPage />}
              
 
-                </div>
-
+           
+             </div>
             </>
         )
     }
